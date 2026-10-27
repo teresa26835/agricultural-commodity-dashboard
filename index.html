@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive research dashboard on US corn, soybean and wheat prices across business cycles." />
+  <title>US Agricultural Commodity Prices | Research Dashboard</title>
+  <style>
+    :root { --navy:#182753; --blue:#317cb5; --cyan:#2aabc0; --bg:#f4f7fb; --ink:#24324a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--ink); }
+    header { background:var(--navy); color:white; padding:22px max(24px,calc((100vw - 1180px)/2)); }
+    nav { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+    nav strong { font-size:16px; }
+    nav a { color:#e3f0ff; text-decoration:none; margin-left:18px; font-size:14px; }
+    .hero { max-width:1180px; margin:0 auto; padding:65px 24px 70px; }
+    .eyebrow { color:#90e0ed; font-weight:bold; letter-spacing:.08em; font-size:12px; }
+    h1 { font-size:clamp(29px,4vw,46px); max-width:850px; line-height:1.17; margin:14px 0; }
+    .hero p { max-width:730px; line-height:1.7; color:#d3dff0; }
+    main { max-width:1180px; margin:0 auto; padding:34px 24px 70px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:26px; }
+    .stat,.panel { background:white; border-radius:12px; padding:22px; box-shadow:0 5px 24px rgba(28,44,74,.06); }
+    .stat b { display:block; font-size:29px; color:var(--navy); }
+    .stat span { font-size:13px; color:#65738a; }
+    h2 { margin:0 0 14px; font-size:24px; }
+    .panel { margin-bottom:25px; }
+    .panel p { line-height:1.7; }
+    .embed { width:100%; aspect-ratio:16/9; min-height:400px; background:#e8edf6; border-radius:8px; overflow:hidden; }
+    iframe { width:100%; height:100%; border:0; }
+    .placeholder { height:100%; min-height:400px; display:flex; align-items:center; justify-content:center; padding:30px; text-align:center; color:#53647d; }
+    .links { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+    .btn { background:var(--navy); color:white; padding:12px 18px; border-radius:8px; text-decoration:none; font-weight:bold; display:inline-block; }
+    .btn.secondary { background:#e7f2f8; color:#155b85; }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .feature { background:#f5f8fc; padding:18px; border-radius:9px; }
+    .feature h3 { margin:0 0 8px; font-size:16px; }
+    .feature p { margin:0; font-size:14px; }
+    footer { text-align:center; color:#63718a; font-size:13px; padding:22px; }
+    @media(max-width:650px) { .stats,.grid { grid-template-columns:1fr; } .embed { min-height:260px; } .placeholder { min-height:260px; } nav a { margin-left:8px; } }
+  </style>
+</head>
+<body>
+<header>
+  <nav><strong>Commodity Price Research</strong><div><a href="#dashboard">Dashboard</a><a href="#methodology">Methodology</a><a href="#source">Source Code</a></div></nav>
+  <div class="hero">
+    <div class="eyebrow">UNITED STATES · 1995–2025</div>
+    <h1>Agricultural Commodity Prices Across Business Cycles</h1>
+    <p>Interactive research on corn, soybean, and wheat prices, macroeconomic drivers, regression diagnostics, rolling windows, and sensitivity to major market shocks.</p>
+  </div>
+</header>
+<main>
+  <section class="stats"><div class="stat"><b>3</b><span>Commodities</span></div><div class="stat"><b>4</b><span>Business cycles</span></div><div class="stat"><b>1995–2025</b><span>Study period</span></div></section>
+  <section class="panel" id="dashboard"><h2>Interactive Power BI Dashboard</h2><p>Explore the report pages and interactive filters below.</p>
+    <div class="embed" id="report-container"><div class="placeholder">Power BI report not connected yet.<br />Replace POWER_BI_EMBED_URL in index.html with the iframe src from Power BI.</div></div>
+  </section>
+  <section class="panel" id="methodology"><h2>Research Methodology</h2><div class="grid">
+    <div class="feature"><h3>Regression Analysis</h3><p>OLS estimates and comparisons across business-cycle regimes.</p></div>
+    <div class="feature"><h3>Model Diagnostics</h3><p>Ljung–Box residual autocorrelation tests.</p></div>
+    <div class="feature"><h3>Rolling Window Analysis</h3><p>Time-varying regression coefficients and model fit.</p></div>
+    <div class="feature"><h3>Sensitivity Analysis</h3><p>Coefficient comparisons before and after major shocks.</p></div>
+  </div></section>
+  <section class="panel" id="source"><h2>Source Code & Reproducibility</h2><p>Explore the analysis scripts, project documentation, and dashboard files in the GitHub repository.</p><div class="links"><a class="btn" id="github-link" href="https://github.com/REPLACE_USERNAME/REPLACE_REPOSITORY" target="_blank" rel="noopener noreferrer">View Source Code on GitHub ↗</a><a class="btn secondary" href="#dashboard">Explore Dashboard</a></div></section>
+</main>
+<footer>Academic research project · Power BI + Python + GitHub Pages</footer>
+<script>
+  // Replace this with the src URL copied from your Power BI embed iframe.
+  const POWER_BI_EMBED_URL = "https://app.powerbi.com/reportEmbed?reportId=fa0784c9-dba1-4cc3-909c-f7d89cfdc239&autoAuth=true&ctid=2a69c91d-e849-4e34-a230-cdf8b27e1964";
+  if (POWER_BI_EMBED_URL) {
+    const iframe = document.createElement("iframe");
+    iframe.src = POWER_BI_EMBED_URL;
+    iframe.title = "Interactive Power BI agricultural commodity dashboard";
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+    document.getElementById("report-container").replaceChildren(iframe);
+  }
+</script>
+</body>
+</html>
